@@ -1,0 +1,32 @@
+.card-container {
+  border: solid black;
+  padding-top: 5px;
+  margin: 50px;
+  width: 200px;
+  height: 300px;
+  display: flex;
+  flex-direction: column;
+}
+
+.game-image {
+  width: 150px;
+  height: 150px;
+  align-self: center;
+  margin-bottom: 5px;
+  color: antiquewhite;
+}
+
+.description-container {
+  color: antiquewhite;
+  background-color: #333333;
+  text-align: center;
+  padding-bottom: 5px;
+  flex: 1;
+}
+
+#game-title {
+  padding: 2px;
+  margin: 2px;
+  font-size: large;
+  font-family: Impact, Haettenschweiler, "Arial Narrow Bold", sans-serif;
+}
