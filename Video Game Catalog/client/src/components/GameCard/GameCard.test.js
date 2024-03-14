@@ -4,24 +4,24 @@ import GameCard from "./GameCard";
 
 describe("GameCard Component", () => {
   it("Renders gamecard correctly with props", () => {
-    const props = {
+    const game = {
       image: "vite.svg",
       title: "Test Game",
       description: "This is a test game.",
     };
     render(
       <GameCard
-        image={props.image}
-        title={props.title}
-        description={props.description}
+        image={game.image}
+        title={game.title}
+        description={game.description}
       />
     );
     expect(screen.getByAltText("Game Image")).toHaveAttribute(
       "src",
-      props.image
+      game.image
     );
-    expect(screen.getByText(props.title)).toBeInTheDocument();
-    expect(screen.getByText(props.description)).toBeInTheDocument();
+    expect(screen.getByText(game.title)).toBeInTheDocument();
+    expect(screen.getByText(game.description)).toBeInTheDocument();
   });
   it("Renders gamecard correctly without any props", () => {
     render(<GameCard />);

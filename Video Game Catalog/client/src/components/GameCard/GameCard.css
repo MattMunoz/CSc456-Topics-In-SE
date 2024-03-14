@@ -24,6 +24,7 @@
   text-align: center;
   overflow-y: scroll;
 }
+
 @keyframes slide-up {
   from {
     height: 0%;
@@ -36,6 +37,7 @@
 .card-container:hover .description-container {
   animation-name: slide-up;
   animation-duration: 1s;
+  animation-fill-mode: forwards;
 }
 
 #game-title {
