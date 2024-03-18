@@ -1,7 +1,8 @@
 import React from "react";
-import { render, screen } from "@testing-library/react";
+import { render, screen, fireEvent } from "@testing-library/react";
 import Slider from "./Slider";
 
+// Integration test
 describe("Slider Component", () => {
   it("Renders slider with one game", () => {
     const gameList = [
@@ -21,10 +22,6 @@ describe("Slider Component", () => {
     expect(screen.getByText("Popular")).toBeInTheDocument();
     expect(screen.getByText(gameList[0].title)).toBeInTheDocument();
     expect(screen.getByText(gameList[0].description)).toBeInTheDocument();
-  });
-  it("Renders slider correctly without games", () => {
-    render(<Slider />);
-    expect(screen.getByText("View More")).toBeInTheDocument();
   });
   it("Renders slider with multiple game", () => {
     const gameList = [
@@ -55,5 +52,51 @@ describe("Slider Component", () => {
     });
     expect(screen.getByText("View More")).toBeInTheDocument();
     expect(screen.getByText("New Release")).toBeInTheDocument();
+  });
+  it("Renders slider correctly with games that have invalid iamge types", () => {
+    const gameList = [
+      {
+        image: 123,
+        title: "Minecraft",
+        description: "Minecraft is a sandboxm game.",
+      },
+      {
+        image: true,
+        title: "Vite",
+        description: "Vite is a testing game.",
+      },
+      {
+        image: ["React.png"],
+        title: "React",
+        description: "React is not a game but is a javascript library.",
+      },
+      {
+        image: "Fornite.png",
+        title: "Fornite",
+        description: "Fornite is a battle royale game.",
+      },
+    ];
+    render(<Slider type="Popular" games={gameList} />);
+    const gameImages = screen.queryAllByAltText("Game Image");
+    const validGames = gameList.filter(
+      (game) => typeof game.image === "string"
+    );
+    expect(screen.getByText("Popular")).toBeInTheDocument();
+    expect(screen.getByText("View More")).toBeInTheDocument();
+    expect(gameImages.length).toBe(validGames.length);
+  });
+  it("Calls onClick handler when a game card is clicked", () => {
+    const onClickMock = jest.fn();
+    const gameList = [
+      {
+        image: "Minecraft.png",
+        title: "Minecraft",
+        description: "Minecraft is a sandbox game.",
+      },
+    ];
+    render(<Slider type="Popular" games={gameList} onClick={onClickMock} />);
+    const gameCard = screen.getByTestId("game-card");
+    fireEvent.click(gameCard);
+    expect(onClickMock).toHaveBeenCalledWith(gameList[0]);
   });
 });

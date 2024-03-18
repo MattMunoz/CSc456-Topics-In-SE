@@ -2,6 +2,7 @@ import React from "react";
 import { render, screen } from "@testing-library/react";
 import GameCard from "./GameCard";
 
+// Unit Testing
 describe("GameCard Component", () => {
   it("Renders gamecard correctly with props", () => {
     const game = {
@@ -23,8 +24,17 @@ describe("GameCard Component", () => {
     expect(screen.getByText(game.title)).toBeInTheDocument();
     expect(screen.getByText(game.description)).toBeInTheDocument();
   });
-  it("Renders gamecard correctly without any props", () => {
-    render(<GameCard />);
-    expect(screen.getByAltText("Game Image")).toBeInTheDocument();
+  it("Renders game card correctly when image type is wrong", () => {
+    const invalidImagePath = 1;
+    render(
+      <GameCard
+        image={invalidImagePath}
+        title="Test Game"
+        description="This is a test game"
+      />
+    );
+    expect(screen.queryByAltText("Game Image")).toBeNull();
+    expect(screen.getByText("Test Game")).toBeInTheDocument();
+    expect(screen.getByText("This is a test game")).toBeInTheDocument();
   });
 });
