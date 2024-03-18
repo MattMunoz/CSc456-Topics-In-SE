@@ -34,6 +34,7 @@ describe("GameCard Component", () => {
       />
     );
     expect(screen.queryByAltText("Game Image")).toBeNull();
+    expect(screen.getByText("Error Processing Image")).toBeInTheDocument();
     expect(screen.getByText("Test Game")).toBeInTheDocument();
     expect(screen.getByText("This is a test game")).toBeInTheDocument();
   });

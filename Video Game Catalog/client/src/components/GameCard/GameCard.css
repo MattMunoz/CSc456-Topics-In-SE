@@ -4,6 +4,7 @@
   width: 200px;
   height: 200px;
   position: relative;
+  color: antiquewhite;
 }
 
 .card-container:hover {
@@ -15,7 +16,6 @@
   height: 100%;
   margin-left: 0%;
   align-self: center;
-  color: antiquewhite;
 }
 
 .description-container {
@@ -24,7 +24,6 @@
   left: 0;
   height: 0%;
   width: 100%;
-  color: antiquewhite;
   background-color: #333333;
   text-align: center;
   overflow-y: scroll;
