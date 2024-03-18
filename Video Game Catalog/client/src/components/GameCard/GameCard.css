@@ -6,9 +6,14 @@
   position: relative;
 }
 
-.game-image {
+.card-container:hover {
+  cursor: pointer;
+}
+
+#game-image {
   width: 100%;
   height: 100%;
+  margin-left: 0%;
   align-self: center;
   color: antiquewhite;
 }

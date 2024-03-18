@@ -3,12 +3,13 @@ import "./Slider.css";
 import GameCard from "../GameCard/GameCard";
 
 const Slider = (props) => {
+  const { onClick } = props;
   return (
     <div className="slider-container">
       <table className="slider-table">
         <thead>
           <tr>
-            <th id="header-genre">{props.type}</th>
+            <th id="slider-header">{props.type}</th>
             <th colSpan="4"></th>
             <th id="view-link">View More</th>
           </tr>
@@ -22,6 +23,9 @@ const Slider = (props) => {
                     image={game.image}
                     title={game.title}
                     description={game.description}
+                    releaseDate={game.releaseDate}
+                    price={game.price}
+                    onClick={() => onClick(game)}
                   />
                 </td>
               ))}
