@@ -1,3 +1,5 @@
+
+
 const request = require('supertest');
 const app = require('../app');
 const videoGame = require('../models/games');
@@ -20,7 +22,7 @@ describe('Integration Test for GET /videogames/:id', () => {
         await videoGame.deleteOne({ _id: testGame._id });
     });
 
-    test('it should retrieve the video game by id and render the show view', async () => {
+    test('retrieve the video game by id and render the show view', async () => {
         const response = await request(app)
             .get(`/videogames/${testGame._id}`)
             .expect(200);
