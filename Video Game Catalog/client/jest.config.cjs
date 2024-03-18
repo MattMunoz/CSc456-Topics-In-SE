@@ -7,4 +7,9 @@ module.exports = {
   },
   setupFilesAfterEnv: ["@testing-library/jest-dom"],
   testEnvironment: "jsdom",
+  testMatch: [
+    "**/src/testing/UnitTest/**/*.test.js",
+    "**/src/testing/IntegrationTest/**/*.test.js",
+    "**/src/testing/EndtoEndTest/**/*.test.js",
+  ],
 };

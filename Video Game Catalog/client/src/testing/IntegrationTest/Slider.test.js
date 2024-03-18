@@ -1,6 +1,6 @@
 import React from "react";
 import { render, screen, fireEvent } from "@testing-library/react";
-import Slider from "./Slider";
+import Slider from "../../components/Slider/Slider";
 
 // Integration test
 describe("Slider Component", () => {
@@ -53,7 +53,7 @@ describe("Slider Component", () => {
     expect(screen.getByText("View More")).toBeInTheDocument();
     expect(screen.getByText("New Release")).toBeInTheDocument();
   });
-  it("Renders slider correctly with games that have invalid iamge types", () => {
+  it("Renders slider correctly with games that have invalid image types", () => {
     const gameList = [
       {
         image: 123,
@@ -93,10 +93,18 @@ describe("Slider Component", () => {
         title: "Minecraft",
         description: "Minecraft is a sandbox game.",
       },
+      {
+        image: "Fornite.png",
+        title: "Fornite",
+        description: "Fornite is a battle royale game.",
+      },
     ];
     render(<Slider type="Popular" games={gameList} onClick={onClickMock} />);
-    const gameCard = screen.getByTestId("game-card");
-    fireEvent.click(gameCard);
+    const gameCard1 = screen.getAllByTestId("game-card")[0];
+    fireEvent.click(gameCard1);
     expect(onClickMock).toHaveBeenCalledWith(gameList[0]);
+    const gameCard2 = screen.getAllByTestId("game-card")[1];
+    fireEvent.click(gameCard2);
+    expect(onClickMock).toHaveBeenCalledWith(gameList[1]);
   });
 });

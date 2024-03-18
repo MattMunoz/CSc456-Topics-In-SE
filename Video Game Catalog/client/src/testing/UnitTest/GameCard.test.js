@@ -1,6 +1,6 @@
 import React from "react";
 import { render, screen } from "@testing-library/react";
-import GameCard from "./GameCard";
+import GameCard from "../../components/GameCard/GameCard";
 
 // Unit Testing
 describe("GameCard Component", () => {

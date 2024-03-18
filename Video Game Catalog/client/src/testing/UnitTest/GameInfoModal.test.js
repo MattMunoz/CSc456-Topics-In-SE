@@ -1,6 +1,6 @@
 import React from "react";
 import { render, screen, fireEvent } from "@testing-library/react";
-import GameInfoModal from "./GameInfoModal";
+import GameInfoModal from "../../components/GameInfoModal/GameInfoModal";
 
 describe("GameInfoModal Component", () => {
   it("Renders game modal correctly with props", () => {

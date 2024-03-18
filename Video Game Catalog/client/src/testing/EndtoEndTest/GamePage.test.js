@@ -1,8 +1,8 @@
 import React from "react";
 import Enzyme, { shallow } from "enzyme";
 import Adapter from "@cfaester/enzyme-adapter-react-18";
-import GamePage from "./GamePage";
-import Slider from "../Slider/Slider";
+import GamePage from "../../components/GamePage/GamePage";
+import Slider from "../../components/Slider/Slider";
 
 Enzyme.configure({ adapter: new Adapter() });
 // End to end test is the last test testing the end-to-end user experience on this page
