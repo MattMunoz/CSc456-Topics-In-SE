@@ -1,12 +1,12 @@
 import React from "react";
 import Enzyme, { shallow } from "enzyme";
 import Adapter from "@cfaester/enzyme-adapter-react-18";
-import GamePage from "../../components/GamePage/GamePage";
+import MainPage from "../../components/MainPage/MainPage";
 import Slider from "../../components/Slider/Slider";
 
 Enzyme.configure({ adapter: new Adapter() });
 // End to end test is the last test testing the end-to-end user experience on this page
-describe("GamePage Component", () => {
+describe("MainPage Component", () => {
   const gameList = [
     {
       image: "Minecraft.png",
@@ -26,17 +26,17 @@ describe("GamePage Component", () => {
     },
   ];
   it("Renders page correctly", () => {
-    const wrapper = shallow(<GamePage gameList={gameList} />);
+    const wrapper = shallow(<MainPage gameList={gameList} />);
     expect(wrapper.find(Slider)).toHaveLength(gameList.length);
     expect(wrapper.find("GameInfoModal").exists()).toBe(false);
   });
   it("Renders game modal when no game data is provided", () => {
-    const wrapper = shallow(<GamePage gameList={[]} />);
+    const wrapper = shallow(<MainPage gameList={[]} />);
     wrapper.find('Slider[type="Popular"]').prop("onClick")();
     expect(wrapper.find("GameInfoModal").exists()).toBe(false);
   });
   it("Open and close modal when game card is clicked", () => {
-    const wrapper = shallow(<GamePage gameList={gameList} />);
+    const wrapper = shallow(<MainPage gameList={gameList} />);
     wrapper.find('Slider[type="Popular"]').prop("onClick")(gameList[0]);
     expect(wrapper.find("GameInfoModal").exists()).toBe(true);
     expect(wrapper.find("GameInfoModal").prop("title")).toBe(gameList[0].title);

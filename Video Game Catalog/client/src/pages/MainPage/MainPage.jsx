@@ -1,10 +1,13 @@
 import React, { useState } from "react";
-import Slider from "../Slider/Slider";
-import GameInfoModal from "../GameInfoModal/GameInfoModal";
+import { useNavigate } from "react-router-dom";
+import Slider from "../../components/Slider/Slider";
+import GameInfoModal from "../../components/GameInfoModal/GameInfoModal";
 
-const GamePage = ({ gameList }) => {
+const MainPage = ({ gameList }) => {
+  // Displays the current game modal
   const [modalGame, setModalGame] = useState(null);
-
+  // Use to navigate to different pages
+  const navigate = useNavigate();
   // Open modal when game card is clicked
   const handleGameCardClick = (game) => {
     setModalGame(game);
@@ -12,6 +15,10 @@ const GamePage = ({ gameList }) => {
   // Close modal when modal background is clicked
   const handleModalClick = () => {
     setModalGame(null);
+  };
+  // Go to search page from main page
+  const handleViewMoreClick = () => {
+    navigate("/search");
   };
   return (
     <>
@@ -25,14 +32,20 @@ const GamePage = ({ gameList }) => {
           onClick={handleModalClick}
         />
       )}
-      <Slider type="Popular" games={gameList} onClick={handleGameCardClick} />
+      <Slider
+        type="Popular"
+        games={gameList}
+        onClick={handleGameCardClick}
+        viewMore={handleViewMoreClick}
+      />
       <Slider
         type="New Release"
         games={gameList}
         onClick={handleGameCardClick}
+        viewMore={handleViewMoreClick}
       />
     </>
   );
 };
 
-export default GamePage;
+export default MainPage;

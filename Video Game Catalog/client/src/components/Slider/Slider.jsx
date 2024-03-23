@@ -4,6 +4,7 @@ import GameCard from "../GameCard/GameCard";
 
 const Slider = (props) => {
   const { onClick } = props;
+  const { viewMore } = props;
   return (
     <div className="slider-container">
       <table className="slider-table">
@@ -11,7 +12,9 @@ const Slider = (props) => {
           <tr>
             <th id="slider-header">{props.type}</th>
             <th colSpan="4"></th>
-            <th id="view-link">View More</th>
+            <th onClick={viewMore} id="view-link">
+              View More
+            </th>
           </tr>
         </thead>
         <tbody>
