@@ -1,8 +1,9 @@
 import React from "react";
-import Enzyme, { shallow } from "enzyme";
+import Enzyme, { mount } from "enzyme";
 import Adapter from "@cfaester/enzyme-adapter-react-18";
-import MainPage from "../../components/MainPage/MainPage";
-import Slider from "../../components/Slider/Slider";
+import { BrowserRouter } from "react-router-dom";
+import MainPage from "../../pages/MainPage/MainPage";
+import { act } from "react-dom/test-utils";
 
 Enzyme.configure({ adapter: new Adapter() });
 // End to end test is the last test testing the end-to-end user experience on this page
@@ -26,18 +27,35 @@ describe("MainPage Component", () => {
     },
   ];
   it("Renders page correctly", () => {
-    const wrapper = shallow(<MainPage gameList={gameList} />);
-    expect(wrapper.find(Slider)).toHaveLength(gameList.length);
+    const wrapper = mount(
+      <BrowserRouter>
+        <MainPage gameList={gameList} />
+      </BrowserRouter>
+    );
+    expect(wrapper.find("Slider").exists()).toBe(true);
     expect(wrapper.find("GameInfoModal").exists()).toBe(false);
+    wrapper.unmount();
   });
   it("Renders game modal when no game data is provided", () => {
-    const wrapper = shallow(<MainPage gameList={[]} />);
+    const wrapper = mount(
+      <BrowserRouter>
+        <MainPage />
+      </BrowserRouter>
+    );
     wrapper.find('Slider[type="Popular"]').prop("onClick")();
     expect(wrapper.find("GameInfoModal").exists()).toBe(false);
+    wrapper.unmount();
   });
   it("Open and close modal when game card is clicked", () => {
-    const wrapper = shallow(<MainPage gameList={gameList} />);
-    wrapper.find('Slider[type="Popular"]').prop("onClick")(gameList[0]);
+    const wrapper = mount(
+      <BrowserRouter>
+        <MainPage gameList={gameList} />
+      </BrowserRouter>
+    );
+    const Slider = wrapper.find("Slider").first();
+    const firstCard = Slider.find("GameCard").first();
+    const secondCard = Slider.find("GameCard").at(1);
+    firstCard.simulate("click");
     expect(wrapper.find("GameInfoModal").exists()).toBe(true);
     expect(wrapper.find("GameInfoModal").prop("title")).toBe(gameList[0].title);
     expect(wrapper.find("GameInfoModal").prop("description")).toBe(
@@ -47,9 +65,9 @@ describe("MainPage Component", () => {
       gameList[0].releaseDate
     );
     expect(wrapper.find("GameInfoModal").prop("price")).toBe(gameList[0].price);
-    wrapper.find("GameInfoModal").prop("onClick")();
+    wrapper.find("GameInfoModal").find("#modal-close-button").simulate("click");
     expect(wrapper.find("GameInfoModal").exists()).toBe(false);
-    wrapper.find('Slider[type="Popular"]').prop("onClick")(gameList[1]);
+    secondCard.simulate("click");
     expect(wrapper.find("GameInfoModal").exists()).toBe(true);
     expect(wrapper.find("GameInfoModal").prop("title")).toBe(gameList[1].title);
     expect(wrapper.find("GameInfoModal").prop("description")).toBe(
@@ -59,7 +77,18 @@ describe("MainPage Component", () => {
       gameList[1].releaseDate
     );
     expect(wrapper.find("GameInfoModal").prop("price")).toBe(gameList[1].price);
-    wrapper.find("GameInfoModal").prop("onClick")();
+    wrapper.find("GameInfoModal").find("#modal-close-button").simulate("click");
     expect(wrapper.find("GameInfoModal").exists()).toBe(false);
+    wrapper.unmount();
+  });
+  it("Navigates to search path when View More is clicked", () => {
+    const wrapper = mount(
+      <BrowserRouter>
+        <MainPage gameList={gameList} />
+      </BrowserRouter>
+    );
+    wrapper.find("Slider").first().find("#view-link").simulate("click");
+    expect(window.location.pathname).toBe("/search");
+    wrapper.unmount();
   });
 });

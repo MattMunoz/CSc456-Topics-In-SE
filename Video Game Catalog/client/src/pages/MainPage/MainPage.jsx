@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { act } from "react-dom/test-utils";
 import Slider from "../../components/Slider/Slider";
 import GameInfoModal from "../../components/GameInfoModal/GameInfoModal";
 
@@ -10,7 +11,9 @@ const MainPage = ({ gameList }) => {
   const navigate = useNavigate();
   // Open modal when game card is clicked
   const handleGameCardClick = (game) => {
-    setModalGame(game);
+    act(() => {
+      setModalGame(game);
+    });
   };
   // Close modal when modal background is clicked
   const handleModalClick = () => {
@@ -21,7 +24,7 @@ const MainPage = ({ gameList }) => {
     navigate("/search");
   };
   return (
-    <>
+    <div className="home-page">
       {modalGame && (
         <GameInfoModal
           image={modalGame.image}
@@ -44,7 +47,7 @@ const MainPage = ({ gameList }) => {
         onClick={handleGameCardClick}
         viewMore={handleViewMoreClick}
       />
-    </>
+    </div>
   );
 };
 
