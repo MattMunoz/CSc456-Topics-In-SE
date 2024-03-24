@@ -16,34 +16,10 @@ jobs:
       with:
         ref: GameComponent
     
-    - name: Navigate to VideoGameCatalog directory
-      run: cd "Video Game Catalog/client" || exit
-      # Navigate to the client directory
-      
-    - name: Print current directory
-      run: pwd
-      # Print current directory to verify
-      
-    - name: Install dependencies
-      run: npm install
-      # This step installs the project dependencies required for testing.
-
-    - name: Build application
-      run: npm run build
-      # This step builds the application, preparing it for testing.
-
-    - name: Run unit tests
-      run: npm run test:unit
-      # This step executes the unit tests.
-
-    - name: Run integration tests
-      run: npm run test:integration
-      # This step executes the integration tests.
-
-    - name: Generate code coverage report
-      run: npm run coverage
-      # This step generates a code coverage report for the tests.
-
-    - name: Run end-to-end tests
-      run: npm run cy:e2e
-      # This step executes the end-to-end tests and runs the application.
+    - name: Run npm install
+      working-directory: Video Game Catalog/client
+      run: |
+          npm install
+          npm run coverage
+          npm run cy:e2e
+      shell: bash
