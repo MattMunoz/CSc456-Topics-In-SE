@@ -17,11 +17,7 @@ jobs:
         ref: GameComponent
     
     - name: Navigate to VideoGameCatalog directory
-      run: cd Video\ Game\ Catalog/
-      # Navigate to the GameComponent directory after checkout
-
-    - name: Navigate to client directory
-      run: cd client/
+      run: cd /Video\ Game\ Catalog/client
       # Navigate to the client directory
       
     - name: Install dependencies
