@@ -17,8 +17,12 @@ jobs:
         ref: GameComponent
     
     - name: Navigate to VideoGameCatalog directory
-      run: cd Video\ Game\ Catalog/client
+      run: cd "Video Game Catalog/client"
       # Navigate to the client directory
+      
+    - name: Print current directory
+      run: pwd
+      # Print current directory to verify
       
     - name: Install dependencies
       run: npm install
