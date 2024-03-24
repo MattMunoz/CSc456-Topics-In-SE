@@ -1,4 +1,4 @@
-Assignment 6:
+Assignment 1:
 
 Note that each team member created branches to work on specific tasks. I focused on the GameComponent branch within the Video Game Catalog and client project.
 
