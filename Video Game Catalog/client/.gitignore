@@ -9,8 +9,7 @@ lerna-debug.log*
 
 node_modules
 coverage
-cypress
-cypress.config.js
+cypress/e2e/2-advanced-examples
 dist
 dist-ssr
 *.local

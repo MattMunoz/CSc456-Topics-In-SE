@@ -2,7 +2,6 @@ import React from "react";
 import { render, screen, fireEvent } from "@testing-library/react";
 import Slider from "../../components/Slider/Slider";
 
-// Integration test
 describe("Slider Component", () => {
   it("Renders slider with one game", () => {
     const gameList = [

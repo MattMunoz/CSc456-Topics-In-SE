@@ -3,10 +3,8 @@ import Enzyme, { mount } from "enzyme";
 import Adapter from "@cfaester/enzyme-adapter-react-18";
 import { BrowserRouter } from "react-router-dom";
 import MainPage from "../../pages/MainPage/MainPage";
-import { act } from "react-dom/test-utils";
 
 Enzyme.configure({ adapter: new Adapter() });
-// End to end test is the last test testing the end-to-end user experience on this page
 describe("MainPage Component", () => {
   const gameList = [
     {

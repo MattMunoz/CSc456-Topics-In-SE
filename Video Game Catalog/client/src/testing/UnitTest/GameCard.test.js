@@ -2,7 +2,6 @@ import React from "react";
 import { render, screen } from "@testing-library/react";
 import GameCard from "../../components/GameCard/GameCard";
 
-// Unit Testing
 describe("GameCard Component", () => {
   it("Renders gamecard correctly with props", () => {
     const game = {
